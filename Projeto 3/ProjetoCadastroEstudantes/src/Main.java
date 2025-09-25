@@ -67,11 +67,23 @@ public class Main
                     int cursoLido = teclado.nextInt();
                     curso = String.format("%02d", cursoLido); // "00" a "99"
                     System.out.print("Nome do estudante: ");
-                    nome = teclado.next();
+                    teclado.nextLine();
+                    nome = teclado.nextLine();
+                    Estudante atual = new Estudante(curso, ra, nome);
+                    int contador = 0;
+                    while(contador < 15){
+                        System.out.println("Digite a " + (contador + 1) +"ª nota, que é da matéria " + Siglas[contador]);
+                        double nota = teclado.nextDouble();
+                        atual.incluirNota(nota);
+                        contador++;
+                        teclado.nextLine();
+                    }
+
                     // inclui em ordem crescente de ra, usando o valor de ondeEsta
                     // como índice de inclusão do novo estudante
-                    estud.incluirEm(new Estudante(curso, ra, nome), estud.getOnde());
+                    estud.incluirEm(atual, estud.getOnde());
                     System.out.println("\nEstudante incluído.");
+                    teclado.nextLine();
                 }
             }
             else
