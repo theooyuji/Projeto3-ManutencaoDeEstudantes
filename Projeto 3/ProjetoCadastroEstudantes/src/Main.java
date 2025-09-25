@@ -10,15 +10,16 @@ public class Main
     public static void main(String[] args) throws Exception {
         estud = new ManterEstudantes(15);
         teclado = new Scanner(System.in);   // System.in representa o teclado
-        estud.lerDados("estudantes.txt");
+        estud.lerDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
+        lerCurso("cursos.txt");
         seletorDeOpcoes();
-        estud.gravarDados("estudantes.txt");
+        estud.gravarDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
     }
 
     public static void seletorDeOpcoes() throws Exception {
         int opcao = -1;
         do {
-            System.out.println("\nOPerações disponíveis:");
+            System.out.println("\nOperações disponíveis:");
             System.out.println("0 - Terminar programa");
             System.out.println("1 - Incluir estudantes");
             System.out.println("2 - Excluir estudantes");
@@ -72,6 +73,8 @@ public class Main
                     System.out.println("\nEstudante incluído.");
                 }
             }
+            else
+                ra = String.format("%05d", raDigitado);
         }
     }
 
@@ -95,13 +98,15 @@ public class Main
                     System.out.println("Estudante excluído.");
                 }
             }
+            else
+                ra = String.format("%05d", raDigitado);
         }
     }
 
     public static void exibicao() throws Exception
     {
         String ra = "99999";
-        while (ra != "00000") {
+        while (!ra.equals("00000")) {
             System.out.print("RA do estudante: (0) para terminar: ");
             int raDigitado = teclado.nextInt();
             if (raDigitado != 0) {
@@ -117,6 +122,8 @@ public class Main
                     System.out.println(estud.valorDe(estud.getOnde()));
                 }
             }
+            else
+                ra = String.format("%05d", raDigitado);
         }
     }
 
@@ -129,28 +136,24 @@ public class Main
         System.out.println();
     }
     public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException{
-        boolean parar = false;
         BufferedReader leitor = null;
         try{
             leitor = new BufferedReader(new FileReader(nomeDoArquivo));
-            parar = true;
         }
         catch(FileNotFoundException erro){
             System.out.println("Não foi possível abrir o arquivo !");
         }
         try{
-            while(!parar){
-                String linha = leitor.readLine();
-                int inicioSigla = 0;
-                int fimSigla = 6;
-                int i = 0;
-                while(!linha.isEmpty() && i < Siglas.length){
-                    String curso = linha.substring(inicioSigla,fimSigla);
-                    Siglas[i] = curso;
-                    inicioSigla = fimSigla;
-                    fimSigla +=6;
-                    i++;
-                }
+            String linha = leitor.readLine();
+            int inicioSigla = 0;
+            int fimSigla = 6;
+            int i = 0;
+            while(!linha.isEmpty() && i < Siglas.length){
+                String curso = linha.substring(inicioSigla,fimSigla);
+                Siglas[i] = curso;
+                inicioSigla = fimSigla;
+                fimSigla +=6;
+                i++;
             }
         }
         catch (Exception erro){
