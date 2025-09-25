@@ -11,7 +11,7 @@ public class Main
         estud = new ManterEstudantes(15);
         teclado = new Scanner(System.in);   // System.in representa o teclado
         estud.lerDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
-        lerCurso("cursos.txt");
+        lerCurso("C:\\Users\\u25155\\IdeaProjects\\Projeto3-ManutencaoDeEstudantes\\Projeto 3\\ProjetoCadastroEstudantes\\siglasDisc.txt");
         seletorDeOpcoes();
         estud.gravarDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
     }
@@ -25,11 +25,12 @@ public class Main
             System.out.println("2 - Excluir estudantes");
             System.out.println("3 - Exibir estudantes");
             System.out.println("4 - Listar estudantes");
-            System.out.println("5 - Ir ao início");
-            System.out.println("6 - Ir ao proximo");
-            System.out.println("7 - Ir ao anterior");
-            System.out.println("8 - Ir ao último");
-            System.out.println("9 - Estatísticas");
+            System.out.println("5 - Alterar estudantes");
+            System.out.println("6 - Ir ao início");
+            System.out.println("7 - Ir ao proximo");
+            System.out.println("8 - Ir ao anterior");
+            System.out.println("9 - Ir ao último");
+            System.out.println("10 - Estatísticas");
             System.out.println("\nDigite o número da operação desejada:");
             opcao = teclado.nextInt();  // lê um inteiro pelo teclado
 
@@ -115,10 +116,17 @@ public class Main
                 // em que índice ele está para podermos excluir desse índice
                 // criamos um objeto Estudante para poder chamar o método existe()
                 Estudante proc = new Estudante(ra);
+                String cursos = "                                                         ";
                 if (!estud.existe(proc))     // ajusta valor de ondeEsta
                     System.out.println("\nRA não encontrado!");
                 else  // ra não repetido, lemos os demais dados
                 {
+                    int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas();
+                    for(int i = 0 ; i < quantasNotas; i++){
+                        cursos += Siglas[i];
+                        cursos += " ";
+                    }
+                    System.out.println(cursos);
                     System.out.println(estud.valorDe(estud.getOnde()));
                 }
             }
@@ -130,30 +138,36 @@ public class Main
     public static void listagem() throws Exception
     {
         System.out.println("\nRelação de estudantes cadastrados:");
-        System.out.println("Curso  RA    Nome                            Notas");
+        System.out.println("Curso  RA    Nome                           QtasNotas    Notas");
         for (int indice=0; indice < estud.getTamanho(); indice++)
             System.out.println(estud.valorDe(indice));
         System.out.println();
     }
     public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException{
         BufferedReader leitor = null;
+        boolean parar = false;
         try{
             leitor = new BufferedReader(new FileReader(nomeDoArquivo));
+
         }
         catch(FileNotFoundException erro){
             System.out.println("Não foi possível abrir o arquivo !");
+            parar = true;
         }
         try{
-            String linha = leitor.readLine();
             int inicioSigla = 0;
             int fimSigla = 6;
-            int i = 0;
-            while(!linha.isEmpty() && i < Siglas.length){
-                String curso = linha.substring(inicioSigla,fimSigla);
-                Siglas[i] = curso;
-                inicioSigla = fimSigla;
-                fimSigla +=6;
-                i++;
+            int i = 0 ;
+            while(!parar){
+                String linha = leitor.readLine();
+                if(!linha.isEmpty()){
+                    String curso = linha.substring(inicioSigla,fimSigla);
+                    Siglas[i] = curso;
+                    i++;
+                }
+                else{
+                    parar = true;
+                }
             }
         }
         catch (Exception erro){

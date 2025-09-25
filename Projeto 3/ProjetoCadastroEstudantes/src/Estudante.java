@@ -5,9 +5,9 @@ public class Estudante
 {
     @Override
     public String toString() {
-        String saida = " " + curso + "   " + ra + "  " + nome + "    " + quantasNotas+" ";
+        String saida = " " + curso + "   " + ra + "  " + nome + "     " + quantasNotas+"       ";
         for (int indice=0; indice < quantasNotas; indice++)
-            saida += String.format("%4.1f ",notas[indice]);
+            saida += String.format("%4.1f   ",notas[indice]);
         return saida;
     }
 
