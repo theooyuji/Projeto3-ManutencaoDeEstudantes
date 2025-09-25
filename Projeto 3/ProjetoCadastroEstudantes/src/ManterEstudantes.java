@@ -24,17 +24,18 @@ public class ManterEstudantes implements ManterDados
     {
         boolean parar = false;
         BufferedReader arquivoDeEntrada = null;
-        try
+        arquivoDeEntrada = new BufferedReader(
+                new FileReader(nomeArquivo)
+        );
+       /* try
         {
-            arquivoDeEntrada = new BufferedReader(
-                    new FileReader(nomeArquivo)
-            );
+
         }
         catch (FileNotFoundException erroDeArquivo)
         {
             System.out.println("Não conseguiu abrir o arquivo");
             parar = true;
-        }
+        }*/
 
         try
         {
