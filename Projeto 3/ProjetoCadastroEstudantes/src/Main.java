@@ -127,6 +127,7 @@ public class Main
                         cursos += " ";
                     }
                     System.out.println(cursos);
+                    System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
                     System.out.println(estud.valorDe(estud.getOnde()));
                 }
             }
@@ -138,7 +139,13 @@ public class Main
     public static void listagem() throws Exception
     {
         System.out.println("\nRelação de estudantes cadastrados:");
-        System.out.println("Curso  RA    Nome                           QtasNotas    Notas");
+        String cursos = "                                                         ";
+        for(int i = 0 ; i < 15; i++){
+            cursos += Siglas[i];
+            cursos += " ";
+        }
+        System.out.println(cursos);
+        System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
         for (int indice=0; indice < estud.getTamanho(); indice++)
             System.out.println(estud.valorDe(indice));
         System.out.println();
