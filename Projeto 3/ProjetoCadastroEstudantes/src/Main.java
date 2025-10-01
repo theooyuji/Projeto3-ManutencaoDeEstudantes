@@ -40,7 +40,8 @@ public class Main
                 case 1 : inclusao(); break;
                 case 2 : exclusao(); break;
                 case 3 : exibicao(); break;
-                case 4 : listagem();
+                case 4 : listagem(); break;
+                case 5: alterar(); break;
             }
         }
         while (opcao != 0);
@@ -191,6 +192,63 @@ public class Main
         }
         catch (Exception erro){
             System.out.println("Erro na leitura de dados!");
+        }
+    }
+
+
+    public static void alterar() throws Exception {
+        String ra = "99999";
+        while(!ra.equals("00000")){
+            System.out.print("Digite o ra do aluno que será alterado (0 para sair): ");
+            int raDigitado = teclado.nextInt();
+            if(raDigitado != 0 ){
+                ra = String.format("%05d", raDigitado);
+                Estudante atual = estud.valorDe(estud.getOnde());
+                if(!estud.existe(new Estudante(ra))){
+                    System.out.println("Não existe aluno com esse ra !");
+                    return;
+                }
+                String cursos = "                                                         ";
+                int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas();
+                for(int i = 0 ; i < quantasNotas; i++){
+                    cursos += Siglas[i];
+                    cursos += " ";
+                }
+                System.out.println(cursos);
+                System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
+                System.out.println(atual);
+                System.out.println("Digite o código do curso (Pressione Enter para manter o curso atual): ");
+                teclado.nextLine();
+                String cursoDigitado = String.format("%2s", teclado.nextLine());
+                if(cursoDigitado.isBlank()){
+                    cursoDigitado = atual.getCurso();
+                }
+                System.out.println("Digite o nome do aluno (Pressione Enter para manter o nome atual): ");
+                String nomeDigitado = String.format("%-30s", teclado.nextLine());
+                if(nomeDigitado.isBlank()){
+                    nomeDigitado = atual.getNome();
+                }
+                double[] notas = atual.getNotas();
+                for(int i = 0 ; i < notas.length; i++){
+                    System.out.println("Digite a "+(i+1) +"ª nota do aluno, que é da matéria " + Siglas[i]);
+                    double nota;
+                    String notaDigitada = String.format("%4s", teclado.nextLine());
+                    if(notaDigitada.isBlank()){
+                        nota = notas[i];
+                    }
+                    else{
+                        nota = Double.parseDouble(notaDigitada);
+                    }
+                    notas[i] = nota;
+                }
+                Estudante proc = new Estudante(cursoDigitado,ra,nomeDigitado);
+                proc.setQuantasNotas(notas.length);
+                proc.setNotas(notas);
+                estud.alterar(proc,estud.getOnde());
+            }
+            else{
+                ra = String.format("%05d",raDigitado);
+            }
         }
     }
 }
