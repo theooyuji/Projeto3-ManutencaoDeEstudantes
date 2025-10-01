@@ -55,7 +55,7 @@ public class Estudante
 
     public void setRa(String ra) throws Exception
     {
-        if (ra.equals("") || ra.length() > 5)
+        if (ra.isEmpty() || ra.length() > 5)
             throw new Exception("RA em formato inválido!");
 
         this.ra = String.format("%5s", ra);
@@ -67,7 +67,7 @@ public class Estudante
 
     public void setNome(String nome) throws Exception
     {
-        if (nome.equals("") || nome.length() > 30)
+        if (nome.isEmpty() || nome.length() > 30)
             throw new Exception("Nome em formato inválido!");
 
         this.nome = String.format("%-30s", nome);

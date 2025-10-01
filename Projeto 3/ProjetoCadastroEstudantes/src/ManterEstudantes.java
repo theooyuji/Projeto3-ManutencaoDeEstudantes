@@ -20,7 +20,7 @@ public class ManterEstudantes implements ManterDados
     }
 
     @Override
-    public void lerDados(String nomeArquivo) throws FileNotFoundException, Exception
+    public void lerDados(String nomeArquivo) throws  Exception
     {
         boolean parar = false;
         BufferedReader arquivoDeEntrada = null;
@@ -28,7 +28,7 @@ public class ManterEstudantes implements ManterDados
         {
             arquivoDeEntrada = new BufferedReader(new FileReader(nomeArquivo));
         }
-        catch (FileNotFoundException erroDeArquivo)
+        catch (Exception erroDeArquivo)
         {
             System.out.println("Não conseguiu abrir o arquivo");
             parar = true;
@@ -72,8 +72,8 @@ public class ManterEstudantes implements ManterDados
     @Override
     public void incluirNoFinal(Estudante novoDado)
     {
-        // if (quantosDados >= dados.length)
-        //    expandirVetor();        // aumenta tamanho físico do vetor
+         if (quantosDados >= dados.length)
+            expandirVetor();        // aumenta tamanho físico do vetor
 
         dados[quantosDados++] = novoDado;
     }
@@ -81,8 +81,8 @@ public class ManterEstudantes implements ManterDados
     @Override
     public void incluirEm(Estudante novoDado, int posicaoDeInclusao) throws Exception
     {
-        // if (quantosDados >= dados.length)
-        //    expandirVetor();        // aumenta tamanho físico do vetor
+        if (quantosDados >= dados.length)
+           expandirVetor();        // aumenta tamanho físico do vetor
 
         if (posicaoDeInclusao < 0 || posicaoDeInclusao > quantosDados)
             throw new Exception("Posição inválida para inclusão!");
@@ -219,7 +219,7 @@ public class ManterEstudantes implements ManterDados
     }
 
     @Override
-    public void expandirVetor(){
+    public  void expandirVetor(){
         Estudante[] proc = new Estudante[dados.length*2];
         for(int i = 0 ; i < quantosDados; i++){
             proc[i] = dados[i];

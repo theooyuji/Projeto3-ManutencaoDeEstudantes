@@ -37,11 +37,19 @@ public class Main
             // definir e tratar a operação escolhida pelo usuário:
             switch (opcao)
             {
+                case 0 : break;
                 case 1 : inclusao(); break;
                 case 2 : exclusao(); break;
                 case 3 : exibicao(); break;
                 case 4 : listagem(); break;
-                case 5: alterar(); break;
+                case 5 : alterar(); break;
+                case 6 : irAoInicio();break;
+                case 7 : irAoProximo(); break;
+                case 8 : irAoAnterior();break;
+                case 9 : irAoUltimo(); break;
+                case 10: estastisticas(); break;
+                default:
+                        System.out.println("Digite um número de opção válido !");
             }
         }
         while (opcao != 0);
@@ -71,8 +79,11 @@ public class Main
                     teclado.nextLine();
                     nome = teclado.nextLine();
                     Estudante atual = new Estudante(curso, ra, nome);
+                    System.out.print("Quantidade de notas desse aluno: ");
+                    teclado.nextLine();
+                    int qtasNotas = teclado.nextInt();
                     int contador = 0;
-                    while(contador < 15){
+                    while(contador < qtasNotas){
                         System.out.println("Digite a " + (contador + 1) +"ª nota, que é da matéria " + Siglas[contador]);
                         double nota = teclado.nextDouble();
                         atual.incluirNota(nota);
@@ -161,7 +172,6 @@ public class Main
         System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
         for (int indice=0; indice < estud.getTamanho(); indice++)
             System.out.println(estud.valorDe(indice));
-        System.out.println();
     }
     public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException{
         BufferedReader leitor = null;
@@ -217,19 +227,21 @@ public class Main
                 System.out.println(cursos);
                 System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
                 System.out.println(atual);
-                System.out.println("Digite o código do curso (Pressione Enter para manter o curso atual): ");
+                System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual): ");
                 teclado.nextLine();
                 String cursoDigitado = String.format("%2s", teclado.nextLine());
                 if(cursoDigitado.isBlank()){
                     cursoDigitado = atual.getCurso();
                 }
-                System.out.println("Digite o nome do aluno (Pressione Enter para manter o nome atual): ");
+                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual): ");
                 String nomeDigitado = String.format("%-30s", teclado.nextLine());
                 if(nomeDigitado.isBlank()){
                     nomeDigitado = atual.getNome();
                 }
+                System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter): ");
                 double[] notas = atual.getNotas();
-                for(int i = 0 ; i < notas.length; i++){
+                int qtasNotas = teclado.nextInt();
+                for(int i = 0 ; i < qtasNotas; i++){
                     System.out.println("Digite a "+(i+1) +"ª nota do aluno, que é da matéria " + Siglas[i]);
                     double nota;
                     String notaDigitada = String.format("%4s", teclado.nextLine());
@@ -251,4 +263,214 @@ public class Main
             }
         }
     }
+
+    public static void irAoInicio(){
+        estud.irAoInicio();
+        String cursos = "                                                         ";
+        for(int i = 0 ; i < 15; i++){
+            cursos += Siglas[i];
+            cursos += " ";
+        }
+        System.out.println(cursos);
+        System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
+        System.out.println(estud.valorDe(estud.getPosicaoAtual()));
+    }
+
+    public static void irAoProximo(){
+        estud.irAoProximo();
+        String cursos = "                                                         ";
+        for(int i = 0 ; i < 15; i++){
+            cursos += Siglas[i];
+            cursos += " ";
+        }
+        System.out.println(cursos);
+        System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
+        System.out.println(estud.valorDe(estud.getPosicaoAtual()));
+    }
+
+    public static void irAoAnterior(){
+        estud.irAoAnterior();
+        String cursos = "                                                         ";
+        for(int i = 0 ; i < 15; i++){
+            cursos += Siglas[i];
+            cursos += " ";
+        }
+        System.out.println(cursos);
+        System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
+        System.out.println(estud.valorDe(estud.getPosicaoAtual()));
+    }
+
+    public static void irAoUltimo(){
+        estud.irAoFim();
+        String cursos = "                                                         ";
+        for(int i = 0 ; i < 15; i++){
+            cursos += Siglas[i];
+            cursos += " ";
+        }
+        System.out.println(cursos);
+        System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
+        System.out.println(estud.valorDe(estud.getPosicaoAtual()));
+    }
+
+    public static void estastisticas() throws Exception {
+
+        Estudante maiorMedia = estudMaiorMedia();
+        double maiorNota = maioresEMenoresNotas(maiorMedia)[1];
+        double menorNota = maioresEMenoresNotas(maiorMedia)[0];
+        System.out.println("-----Estastísticas-----");
+        System.out.println("\nDisciplina com maior número de aprovados: " + discAprovados());
+        System.out.println("Disciplina com maior número de retidos: " + discRetidos());
+        System.out.println("Estudante com maior média: " + maiorMedia.getNome());
+        System.out.println("Maior nota do estudante com maior média: " + maiorNota);
+        System.out.println("Menor nota do estudante com maior média: " + menorNota);
+        for(int i = 0 ; i < Siglas.length; i++){
+            System.out.println("Média dos estudante na matéria " + Siglas[i]+": " + mediaCurso(Siglas[i]));
+        }
+        System.out.println("Aluno com maior nota na disciplina com menor média: " + maiorNotaMenorMedia().getNome() );
+        System.out.println("Aluno com menor nota na disciplina com maior média: " + menorNotaMaiorMedia().getNome());
+    }
+
+    public static String discAprovados(){
+        int contAprovadosAtual;
+        int contAprovadosMax = 0;
+        int indMax = 0;
+        for(int i = 0; i < Siglas.length; i++){
+            contAprovadosAtual = 0;
+            for(int ii = 0 ; ii < estud.getTamanho(); ii++){
+                Estudante atual = estud.valorDe(ii);
+                double[] nota = atual.getNotas();
+                if(nota[i] >= 5.0){
+                    contAprovadosAtual ++;
+                }
+                if(contAprovadosAtual > contAprovadosMax){
+                    contAprovadosMax = contAprovadosAtual;
+                    indMax = i;
+                }
+            }
+        }
+        return Siglas[indMax];
+    }
+
+    public static String discRetidos(){
+        int contRetidosAtual;
+        int contRetidosMax = 0;
+        int indMax = 0;
+        for(int i = 0; i < Siglas.length; i++){
+            contRetidosAtual = 0;
+            for(int ii = 0 ; ii < estud.getTamanho(); ii++){
+                Estudante atual = estud.valorDe(ii);
+                double[] nota = atual.getNotas();
+                if(nota[i] < 5.0){
+                    contRetidosAtual++;
+                }
+                if(contRetidosAtual > contRetidosMax){
+                    contRetidosMax = contRetidosAtual;
+                    indMax = i;
+                }
+            }
+        }
+        return Siglas[indMax];
+    }
+
+    public static Estudante estudMaiorMedia() throws Exception {
+        double mediaMax = 0.0;
+        int indMax = 0;
+        for(int i = 0 ; i < estud.getTamanho(); i++){
+           Estudante atual =  estud.valorDe(i);
+           if(atual.mediaDasNotas() > mediaMax){
+               mediaMax = atual.mediaDasNotas();
+               indMax = i;
+           }
+        }
+        return estud.valorDe(indMax);
+    }
+
+    public static double[] maioresEMenoresNotas(Estudante proc){
+        double[] notas = new double[2];
+        double menorNota = 10;
+        double maiorNota = 0;
+        double[] notasAluno = proc.getNotas();
+        for(int i = 0 ; i < proc.getQuantasNotas(); i++){
+            double notaAtual = notasAluno[i];
+            if(notaAtual > maiorNota){
+                maiorNota = notaAtual;
+            }
+            if(notaAtual < menorNota){
+                menorNota = notaAtual;
+            }
+        }
+        notas[0]= menorNota;
+        notas[1] = maiorNota;
+        return notas;
+    }
+
+    public static double mediaCurso(String curso){
+        int indCurso = -1;
+        for(int i = 0 ; i < Siglas.length;i++){
+            if(Siglas[i].equals(curso)){
+                indCurso = i;
+                break;
+            }
+        }
+        int contador = 0;
+        double somaCurso = 0;
+        for(int ii = 0 ; ii < estud.getTamanho();ii++){
+            Estudante atual = estud.valorDe(ii);
+            double[] notasAtual = atual.getNotas();
+            somaCurso += notasAtual[indCurso];
+            contador++;
+        }
+        return somaCurso/contador;
+    }
+
+    public static Estudante maiorNotaMenorMedia(){
+        int indCurso = 0;
+        double mediaMax = 10;
+        double mediaAtual;
+        for(int i =0 ; i < Siglas.length; i++){
+            mediaAtual = mediaCurso(Siglas[i]);
+            if(mediaAtual < mediaMax){
+                mediaMax = mediaAtual;
+                indCurso = i;
+            }
+        }
+        double maiorNota = 0;
+        int indEstudante = 0;
+        for(int i = 0 ; i < estud.getTamanho();i++){
+            Estudante atual = estud.valorDe(i);
+            double[] notas = atual.getNotas();
+            if(notas[indCurso] > maiorNota){
+                maiorNota = notas[indCurso];
+                indEstudante = i;
+            }
+        }
+
+        return estud.valorDe(indEstudante);
+    }
+
+    public static Estudante menorNotaMaiorMedia(){
+        int indCurso = 0;
+        double mediaMax = 0;
+        double mediaAtual;
+        for(int i =0 ; i < Siglas.length; i++){
+            mediaAtual = mediaCurso(Siglas[i]);
+            if(mediaAtual > mediaMax){
+                mediaMax = mediaAtual;
+                indCurso = i;
+            }
+        }
+        double maiorNota = 10;
+        int indEstudante = 0;
+        for(int i = 0 ; i < estud.getTamanho();i++){
+            Estudante atual = estud.valorDe(i);
+            double[] notas = atual.getNotas();
+            if(notas[indCurso] < maiorNota){
+                maiorNota = notas[indCurso];
+                indEstudante = i;
+            }
+        }
+
+        return estud.valorDe(indEstudante);
+    }
+
 }
