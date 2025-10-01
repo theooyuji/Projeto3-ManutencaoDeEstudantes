@@ -26,5 +26,6 @@ public interface ManterDados
     void irAoFim();
     void irAoAnterior();
     void irAoProximo();
-    int getOnde();  // retorna o índice em que a pesquisa binária parou
+    int getOnde();
+    void expandirVetor();// retorna o índice em que a pesquisa binária parou
 }

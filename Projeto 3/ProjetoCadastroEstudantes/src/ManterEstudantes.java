@@ -217,4 +217,14 @@ public class ManterEstudantes implements ManterDados
         if (posicaoAtual < quantosDados - 1)
             posicaoAtual++;
     }
+
+    @Override
+    public void expandirVetor(){
+        Estudante[] proc = new Estudante[dados.length*2];
+        for(int i = 0 ; i < quantosDados; i++){
+            proc[i] = dados[i];
+        }
+        dados = proc;
+    }
+
 }
