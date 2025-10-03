@@ -173,7 +173,7 @@ public class Main
         for (int indice=0; indice < estud.getTamanho(); indice++)
             System.out.println(estud.valorDe(indice));
     }
-    public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException{
+    public static void lerCurso(String nomeDoArquivo) throws IOException {
         BufferedReader leitor = null;
         boolean parar = false;
         try{
@@ -199,10 +199,12 @@ public class Main
                     parar = true;
                 }
             }
+            leitor.close();
         }
         catch (Exception erro){
             System.out.println("Erro na leitura de dados!");
         }
+
     }
 
 
