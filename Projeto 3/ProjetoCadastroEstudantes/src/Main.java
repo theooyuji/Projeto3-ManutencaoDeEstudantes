@@ -173,36 +173,23 @@ public class Main
         for (int indice=0; indice < estud.getTamanho(); indice++)
             System.out.println(estud.valorDe(indice));
     }
-    public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException{
-        BufferedReader leitor = null;
-        boolean parar = false;
+    public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException {
+        Scanner leitor = null;
         try{
-            leitor = new BufferedReader(new FileReader(nomeDoArquivo));
-
-        }
-        catch(FileNotFoundException erro){
-            System.out.println("Não foi possível abrir o arquivo !");
-            parar = true;
+            leitor = new Scanner(new File(nomeDoArquivo));
+        }catch (FileNotFoundException fe){
+            System.out.println("Erro ao abrir arquivo !");
         }
         try{
-            int inicioSigla = 0;
-            int fimSigla = 6;
-            int i = 0 ;
-            while(!parar){
-                String linha = leitor.readLine();
-                if(!linha.isEmpty()){
-                    String curso = linha.substring(inicioSigla,fimSigla);
-                    Siglas[i] = curso;
-                    i++;
-                }
-                else{
-                    parar = true;
-                }
+            int i = 0;
+            while(leitor.hasNextLine()){
+                Siglas[i] = leitor.nextLine();
+                i++;
             }
+        }catch(Exception e){
+            System.out.println("Erro ao ler dados do arquivo !" + e);
         }
-        catch (Exception erro){
-            System.out.println("Erro na leitura de dados!");
-        }
+
     }
 
 
