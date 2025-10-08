@@ -11,12 +11,12 @@ public class Main
         estud = new ManterEstudantes(15);
         teclado = new Scanner(System.in);   // System.in representa o teclado
         estud.lerDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
-        lerCurso("C:\\Users\\u25155\\IdeaProjects\\Projeto3-ManutencaoDeEstudantes\\Projeto 3\\ProjetoCadastroEstudantes\\siglasDisc.txt");
+        lerCurso("Projeto 3/ProjetoCadastroEstudantes/siglasDisc.txt");
         seletorDeOpcoes();
         estud.gravarDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
     }
 
-    public static void seletorDeOpcoes() throws Exception {
+    public static void seletorDeOpcoes() throws Exception { //seletor de opções
         int opcao = -1;
         do {
             System.out.println("\nOperações disponíveis:");
@@ -80,8 +80,8 @@ public class Main
                     nome = teclado.nextLine();
                     Estudante atual = new Estudante(curso, ra, nome);
                     System.out.print("Quantidade de notas desse aluno: ");
-                    teclado.nextLine();
-                    int qtasNotas = teclado.nextInt();
+                   // teclado.nextLine();
+                    int qtasNotas = Integer.parseInt(teclado.nextLine());
                     int contador = 0;
                     while(contador < qtasNotas){
                         System.out.println("Digite a " + (contador + 1) +"ª nota, que é da matéria " + Siglas[contador]);
@@ -239,6 +239,7 @@ public class Main
                     nomeDigitado = atual.getNome();
                 }
                 System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter): ");
+                teclado.nextLine();
                 double[] notas = atual.getNotas();
                 int qtasNotas = teclado.nextInt();
                 for(int i = 0 ; i < qtasNotas; i++){
