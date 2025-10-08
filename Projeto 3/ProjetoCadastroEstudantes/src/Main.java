@@ -312,7 +312,7 @@ public class Main
         System.out.println("Maior nota do estudante com maior média: " + maiorNota);
         System.out.println("Menor nota do estudante com maior média: " + menorNota);
         for(int i = 0 ; i < Siglas.length; i++){
-            System.out.println("Média dos estudante na matéria " + Siglas[i]+": " + mediaCurso(Siglas[i]));
+            System.out.println("Média dos estudante na matéria " + Siglas[i]+": " + String.format("%.2f",mediaCurso(Siglas[i])));
         }
         System.out.println("Aluno com maior nota na disciplina com menor média: " + maiorNotaMenorMedia().getNome() );
         System.out.println("Aluno com menor nota na disciplina com maior média: " + menorNotaMaiorMedia().getNome());
