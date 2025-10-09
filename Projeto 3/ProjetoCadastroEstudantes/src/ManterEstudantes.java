@@ -220,11 +220,11 @@ public class ManterEstudantes implements ManterDados
 
     @Override
     public  void expandirVetor(){
-        Estudante[] proc = new Estudante[dados.length*2];
+        Estudante[] proc = new Estudante[dados.length*2]; // novo vetor Estudante que tem o dobro do tamanho do vetor Estudante original
         for(int i = 0 ; i < quantosDados; i++){
             proc[i] = dados[i];
         }
-        dados = proc;
+        dados = proc; 
     }
 
 }

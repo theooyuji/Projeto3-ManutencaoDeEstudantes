@@ -11,12 +11,12 @@ public class Main
         estud = new ManterEstudantes(15);
         teclado = new Scanner(System.in);   // System.in representa o teclado
         estud.lerDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
-        lerCurso("C:\\Users\\u25155\\IdeaProjects\\Projeto3-ManutencaoDeEstudantes\\Projeto 3\\ProjetoCadastroEstudantes\\siglasDisc.txt");
+        lerCurso("Projeto 3/ProjetoCadastroEstudantes/siglasDisc.txt");
         seletorDeOpcoes();
         estud.gravarDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
     }
 
-    public static void seletorDeOpcoes() throws Exception {
+    public static void seletorDeOpcoes() throws Exception { //seletor de opções
         int opcao = -1;
         do {
             System.out.println("\nOperações disponíveis:");
@@ -31,7 +31,7 @@ public class Main
             System.out.println("8 - Ir ao anterior");
             System.out.println("9 - Ir ao último");
             System.out.println("10 - Estatísticas");
-            System.out.print("\nDigite o número da operação desejada:");
+            System.out.println("\nDigite o número da operação desejada:");
             opcao = teclado.nextInt();  // lê um inteiro pelo teclado
 
             // definir e tratar a operação escolhida pelo usuário:
@@ -80,8 +80,8 @@ public class Main
                     nome = teclado.nextLine();
                     Estudante atual = new Estudante(curso, ra, nome);
                     System.out.print("Quantidade de notas desse aluno: ");
-                    teclado.nextLine();
-                    int qtasNotas = teclado.nextInt();
+                   // teclado.nextLine();
+                    int qtasNotas = Integer.parseInt(teclado.nextLine());
                     int contador = 0;
                     while(contador < qtasNotas){
                         System.out.println("Digite a " + (contador + 1) +"ª nota, que é da matéria " + Siglas[contador]);
@@ -214,28 +214,23 @@ public class Main
                 System.out.println(cursos);
                 System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
                 System.out.println(atual);
-                System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual: "+ atual.getCurso() + "): ");
+                System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual): ");
                 teclado.nextLine();
                 String cursoDigitado = String.format("%2s", teclado.nextLine());
                 if(cursoDigitado.isBlank()){
                     cursoDigitado = atual.getCurso();
                 }
-                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual:"+atual.getNome()+"): ");
+                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual): ");
                 String nomeDigitado = String.format("%-30s", teclado.nextLine());
                 if(nomeDigitado.isBlank()){
                     nomeDigitado = atual.getNome();
                 }
-                System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter a quantidade atual "+ atual.getQuantasNotas()+"): ");
+                System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter): ");
+                teclado.nextLine();
                 double[] notas = atual.getNotas();
-                int qtasNotas;
-                String quantasNotasDigitadas = teclado.nextLine() ;
-                if(quantasNotasDigitadas.isBlank()){
-                    qtasNotas = atual.getQuantasNotas();
-                }else{
-                    qtasNotas = Integer.parseInt(quantasNotasDigitadas);
-                }
+                int qtasNotas = teclado.nextInt();
                 for(int i = 0 ; i < qtasNotas; i++){
-                    System.out.println("Digite a "+(i+1) +"ª nota do aluno, que é da matéria " + Siglas[i] + "(Pressione Enter para manter a nota: "+notas[i]+" )");
+                    System.out.println("Digite a "+(i+1) +"ª nota do aluno, que é da matéria " + Siglas[i]);
                     double nota;
                     String notaDigitada = String.format("%4s", teclado.nextLine());
                     if(notaDigitada.isBlank()){
@@ -317,7 +312,7 @@ public class Main
         System.out.println("Maior nota do estudante com maior média: " + maiorNota);
         System.out.println("Menor nota do estudante com maior média: " + menorNota);
         for(int i = 0 ; i < Siglas.length; i++){
-            System.out.println("Média dos estudante na matéria " + Siglas[i]+": " + mediaCurso(Siglas[i]));
+            System.out.println("Média dos estudante na matéria " + Siglas[i]+": " + String.format("%.2f",mediaCurso(Siglas[i])));
         }
         System.out.println("Aluno com maior nota na disciplina com menor média: " + maiorNotaMenorMedia().getNome() );
         System.out.println("Aluno com menor nota na disciplina com maior média: " + menorNotaMaiorMedia().getNome());
