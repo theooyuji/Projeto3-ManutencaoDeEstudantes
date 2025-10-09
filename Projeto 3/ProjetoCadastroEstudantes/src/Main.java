@@ -200,11 +200,11 @@ public class Main
             int raDigitado = teclado.nextInt();
             if(raDigitado != 0 ){
                 ra = String.format("%05d", raDigitado);
-                Estudante atual = estud.valorDe(estud.getOnde());
                 if(!estud.existe(new Estudante(ra))){
                     System.out.println("Não existe aluno com esse ra !");
                     return;
                 }
+                Estudante atual = estud.valorDe(estud.getOnde());
                 String cursos = "                                                         ";
                 int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas();
                 for(int i = 0 ; i < quantasNotas; i++){
@@ -214,18 +214,18 @@ public class Main
                 System.out.println(cursos);
                 System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
                 System.out.println(atual);
-                System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual): ");
+                System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual, que é: " + atual.getCurso()+ "): ");
                 teclado.nextLine();
                 String cursoDigitado = String.format("%2s", teclado.nextLine());
                 if(cursoDigitado.isBlank()){
                     cursoDigitado = atual.getCurso();
                 }
-                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual): ");
+                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual, que é: " + atual.getNome()+ "): ");
                 String nomeDigitado = String.format("%-30s", teclado.nextLine());
                 if(nomeDigitado.isBlank()){
                     nomeDigitado = atual.getNome();
                 }
-                System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter): ");
+                System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter a quantidade atual, que é: " + atual.getQuantasNotas() +"): ");
                 teclado.nextLine();
                 double[] notas = atual.getNotas();
                 int qtasNotas = teclado.nextInt();
