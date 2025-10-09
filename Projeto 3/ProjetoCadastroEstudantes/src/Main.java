@@ -14,6 +14,7 @@ public class Main
         lerCurso("Projeto 3/ProjetoCadastroEstudantes/siglasDisc.txt");
         seletorDeOpcoes();
         estud.gravarDados("Projeto 3/ProjetoCadastroEstudantes/estudantes.txt");
+        teclado.close();
     }
 
     public static void seletorDeOpcoes() throws Exception { //seletor de opções
@@ -186,6 +187,7 @@ public class Main
                 Siglas[i] = leitor.nextLine();
                 i++;
             }
+            leitor.close();
         }catch(Exception e){
             System.out.println("Erro ao ler dados do arquivo !" + e);
         }
