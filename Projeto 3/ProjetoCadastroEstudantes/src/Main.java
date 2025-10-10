@@ -149,7 +149,7 @@ public class Main
                     int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas();
                     for(int i = 0 ; i < quantasNotas; i++){
                         cursos += Siglas[i];
-                        cursos += " ";
+                        cursos += "\t";
                     }
                     System.out.println(cursos);
                     System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
