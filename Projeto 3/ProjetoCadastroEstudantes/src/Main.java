@@ -165,7 +165,7 @@ public class Main
     {
         System.out.println("\nRelação de estudantes cadastrados:");
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
+        for(int i = 0 ; i < 15; i++){ // passa as disciplinas que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -209,7 +209,7 @@ public class Main
                 Estudante atual = estud.valorDe(estud.getOnde());
                 String cursos = "                                                         ";
                 int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas(); // quantas notas o estudante tem
-                for(int i = 0 ; i < quantasNotas; i++){ // passa as materias que estao no vetor para uma string
+                for(int i = 0 ; i < quantasNotas; i++){ // passa as disciplinas que estao no vetor para uma string
                     cursos += Siglas[i];
                     cursos += " ";
                 }
@@ -257,7 +257,7 @@ public class Main
     public static void irAoInicio(){
         estud.irAoInicio(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
+        for(int i = 0 ; i < 15; i++){ // passa as diciplinas que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -269,7 +269,7 @@ public class Main
     public static void irAoProximo(){
         estud.irAoProximo(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
+        for(int i = 0 ; i < 15; i++){ // passa as disciplinas que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -281,7 +281,7 @@ public class Main
     public static void irAoAnterior(){
         estud.irAoAnterior(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
+        for(int i = 0 ; i < 15; i++){ // passa as disciplinas que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -293,7 +293,7 @@ public class Main
     public static void irAoUltimo(){
         estud.irAoFim(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
+        for(int i = 0 ; i < 15; i++){ // passa as disciplinas que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
