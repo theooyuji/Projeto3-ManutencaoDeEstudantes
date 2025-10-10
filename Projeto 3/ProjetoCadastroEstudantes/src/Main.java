@@ -222,7 +222,7 @@ public class Main
                 if(cursoDigitado.isBlank()){ // se não digitar um novo curso, continuara sendo o mesmo curso
                     cursoDigitado = atual.getCurso();
                 }
-                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual, que é: " + atual.getNome()+ "): ");
+                System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual, que é: " + atual.getNome().trim()+ "): ");
                 String nomeDigitado = String.format("%-30s", teclado.nextLine());
                 if(nomeDigitado.isBlank()){ // se não digitar um novo nome, continuara sendo o mesmo nome
                     nomeDigitado = atual.getNome();
