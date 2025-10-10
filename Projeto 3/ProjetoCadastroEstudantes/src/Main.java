@@ -165,13 +165,13 @@ public class Main
     {
         System.out.println("\nRelação de estudantes cadastrados:");
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){
+        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
         System.out.println(cursos);
         System.out.println("\n"+"Curso  RA    Nome                           QtasNotas    Notas");
-        for (int indice=0; indice < estud.getTamanho(); indice++)
+        for (int indice=0; indice < estud.getTamanho(); indice++)   // printar todos os estudantes
             System.out.println(estud.valorDe(indice));
     }
     public static void lerCurso(String nomeDoArquivo) throws FileNotFoundException {
@@ -197,19 +197,19 @@ public class Main
 
     public static void alterar() throws Exception {
         String ra = "99999";
-        while(!ra.equals("00000")){
+        while(!ra.equals("00000")){ //
             System.out.print("Digite o ra do aluno que será alterado (0 para sair): ");
             int raDigitado = teclado.nextInt();
             if(raDigitado != 0 ){
                 ra = String.format("%05d", raDigitado);
-                if(!estud.existe(new Estudante(ra))){
+                if(!estud.existe(new Estudante(ra))){ // procura o ra usando pesquisa binaria
                     System.out.println("Não existe aluno com esse ra !");
                     return;
                 }
                 Estudante atual = estud.valorDe(estud.getOnde());
                 String cursos = "                                                         ";
-                int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas();
-                for(int i = 0 ; i < quantasNotas; i++){
+                int quantasNotas = estud.valorDe(estud.getOnde()).getQuantasNotas(); // quantas notas o estudante tem
+                for(int i = 0 ; i < quantasNotas; i++){ // passa as materias que estao no vetor para uma string
                     cursos += Siglas[i];
                     cursos += " ";
                 }
@@ -218,13 +218,13 @@ public class Main
                 System.out.println(atual);
                 System.out.print("Digite o código do curso (Pressione Enter para manter o curso atual, que é: " + atual.getCurso()+ "): ");
                 teclado.nextLine();
-                String cursoDigitado = String.format("%2s", teclado.nextLine());
-                if(cursoDigitado.isBlank()){
+                String cursoDigitado = String.format("%2s", teclado.nextLine()); //
+                if(cursoDigitado.isBlank()){ // se não digitar um novo curso, continuara sendo o mesmo curso
                     cursoDigitado = atual.getCurso();
                 }
                 System.out.print("Digite o nome do aluno (Pressione Enter para manter o nome atual, que é: " + atual.getNome()+ "): ");
                 String nomeDigitado = String.format("%-30s", teclado.nextLine());
-                if(nomeDigitado.isBlank()){
+                if(nomeDigitado.isBlank()){ // se não digitar um novo nome, continuara sendo o mesmo nome
                     nomeDigitado = atual.getNome();
                 }
                 System.out.print("Digite a quantidade de notas do aluno (Pressione Enter para manter a quantidade atual, que é: " + atual.getQuantasNotas() +"): ");
@@ -235,7 +235,7 @@ public class Main
                     System.out.println("Digite a "+(i+1) +"ª nota do aluno, que é da matéria " + Siglas[i]);
                     double nota;
                     String notaDigitada = String.format("%4s", teclado.nextLine());
-                    if(notaDigitada.isBlank()){
+                    if(notaDigitada.isBlank()){ // se não digitar novas notas, continuarão sendo o mesmas notas
                         nota = notas[i];
                     }
                     else{
@@ -255,9 +255,9 @@ public class Main
     }
 
     public static void irAoInicio(){
-        estud.irAoInicio();
+        estud.irAoInicio(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){
+        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -267,9 +267,9 @@ public class Main
     }
 
     public static void irAoProximo(){
-        estud.irAoProximo();
+        estud.irAoProximo(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){
+        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -279,9 +279,9 @@ public class Main
     }
 
     public static void irAoAnterior(){
-        estud.irAoAnterior();
+        estud.irAoAnterior(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){
+        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -291,9 +291,9 @@ public class Main
     }
 
     public static void irAoUltimo(){
-        estud.irAoFim();
+        estud.irAoFim(); //chama o metodo da classe ManterEstudantes
         String cursos = "                                                         ";
-        for(int i = 0 ; i < 15; i++){
+        for(int i = 0 ; i < 15; i++){ // passa as materias que estao no vetor para uma string
             cursos += Siglas[i];
             cursos += " ";
         }
@@ -324,17 +324,17 @@ public class Main
         int contAprovadosAtual;
         int contAprovadosMax = 0;
         int indMax = 0;
-        for(int i = 0; i < Siglas.length; i++){
+        for(int i = 0; i < Siglas.length; i++){ // para cada disciplina
             contAprovadosAtual = 0;
             for(int ii = 0 ; ii < estud.getTamanho(); ii++){
                 Estudante atual = estud.valorDe(ii);
                 double[] nota = atual.getNotas();
-                if(nota[i] >= 5.0){
+                if(nota[i] >= 5.0){ // checa se o aluno está aprovado
                     contAprovadosAtual ++;
                 }
                 if(contAprovadosAtual > contAprovadosMax){
                     contAprovadosMax = contAprovadosAtual;
-                    indMax = i;
+                    indMax = i; // indice da disciplina com mais aprovados
                 }
             }
         }
@@ -345,17 +345,17 @@ public class Main
         int contRetidosAtual;
         int contRetidosMax = 0;
         int indMax = 0;
-        for(int i = 0; i < Siglas.length; i++){
+        for(int i = 0; i < Siglas.length; i++){ // para cada disciplina
             contRetidosAtual = 0;
             for(int ii = 0 ; ii < estud.getTamanho(); ii++){
                 Estudante atual = estud.valorDe(ii);
                 double[] nota = atual.getNotas();
-                if(nota[i] < 5.0){
+                if(nota[i] < 5.0){ // checa se o estudante está retido
                     contRetidosAtual++;
                 }
                 if(contRetidosAtual > contRetidosMax){
                     contRetidosMax = contRetidosAtual;
-                    indMax = i;
+                    indMax = i; // indice da disciplina com maior número de retidos
                 }
             }
         }
@@ -365,11 +365,11 @@ public class Main
     public static Estudante estudMaiorMedia() throws Exception {
         double mediaMax = 0.0;
         int indMax = 0;
-        for(int i = 0 ; i < estud.getTamanho(); i++){
+        for(int i = 0 ; i < estud.getTamanho(); i++){ // procura pela média de todos os estudantes
            Estudante atual =  estud.valorDe(i);
            if(atual.mediaDasNotas() > mediaMax){
-               mediaMax = atual.mediaDasNotas();
-               indMax = i;
+               mediaMax = atual.mediaDasNotas(); // armazena a maior média atual
+               indMax = i; // indice do estudante que tem a maior média
            }
         }
         return estud.valorDe(indMax);
@@ -380,9 +380,9 @@ public class Main
         double menorNota = 10;
         double maiorNota = 0;
         double[] notasAluno = proc.getNotas();
-        for(int i = 0 ; i < proc.getQuantasNotas(); i++){
+        for(int i = 0 ; i < proc.getQuantasNotas(); i++){   // passa por todas as notas do aluno
             double notaAtual = notasAluno[i];
-            if(notaAtual > maiorNota){
+            if(notaAtual > maiorNota){  // e checa e armazena quais as são as maiores e menores
                 maiorNota = notaAtual;
             }
             if(notaAtual < menorNota){
@@ -397,8 +397,8 @@ public class Main
     public static double mediaCurso(String curso){
         int indCurso = -1;
         for(int i = 0 ; i < Siglas.length;i++){
-            if(Siglas[i].equals(curso)){
-                indCurso = i;
+            if(Siglas[i].equals(curso)){ // se a disciplina em Siglas[] for igual a disciplina em curso
+                indCurso = i;   // indice do curso é igual ao indice de Siglas[]
                 break;
             }
         }
@@ -410,18 +410,18 @@ public class Main
             somaCurso += notasAtual[indCurso];
             contador++;
         }
-        return somaCurso/contador;
+        return somaCurso/contador; // média das notas da disciplina
     }
 
     public static Estudante maiorNotaMenorMedia(){
         int indCurso = 0;
         double mediaMax = 10;
         double mediaAtual;
-        for(int i =0 ; i < Siglas.length; i++){
+        for(int i =0 ; i < Siglas.length; i++){ // para cada disciplina
             mediaAtual = mediaCurso(Siglas[i]);
             if(mediaAtual < mediaMax){
                 mediaMax = mediaAtual;
-                indCurso = i;
+                indCurso = i; // indice da disciplina com menor média
             }
         }
         double maiorNota = 0;
@@ -431,7 +431,7 @@ public class Main
             double[] notas = atual.getNotas();
             if(notas[indCurso] > maiorNota){
                 maiorNota = notas[indCurso];
-                indEstudante = i;
+                indEstudante = i; // indice do estudante com maior nota
             }
         }
 
@@ -442,11 +442,11 @@ public class Main
         int indCurso = 0;
         double mediaMax = 0;
         double mediaAtual;
-        for(int i =0 ; i < Siglas.length; i++){
+        for(int i =0 ; i < Siglas.length; i++){ // para cada disciplina
             mediaAtual = mediaCurso(Siglas[i]);
             if(mediaAtual > mediaMax){
                 mediaMax = mediaAtual;
-                indCurso = i;
+                indCurso = i; // indice da disciplina com maior média
             }
         }
         double maiorNota = 10;
@@ -456,7 +456,7 @@ public class Main
             double[] notas = atual.getNotas();
             if(notas[indCurso] < maiorNota){
                 maiorNota = notas[indCurso];
-                indEstudante = i;
+                indEstudante = i; // indice do aluno com menor nota
             }
         }
 

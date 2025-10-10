@@ -162,11 +162,11 @@ public class Estudante
 
     public double mediaDasNotas() throws Exception
     {
-        if (quantasNotas <= 0)
+        if (quantasNotas <= 0) // se não tiver notas não pode fazer a média
             throw new Exception("Quantidade de notas inválida para a média!");
 
         double soma = 0;
-        for (int ind = 0; ind < quantasNotas; ind++)
+        for (int ind = 0; ind < quantasNotas; ind++) // somatório das notas para descobrir a média
             soma += notas[ind];
         return soma / quantasNotas;
     }
